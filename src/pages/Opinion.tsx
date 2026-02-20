@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchArticles, submitOpinion, type Article } from '../lib/supabase';
-import { Calendar, Send, Clock, ArrowRight } from 'lucide-react';
+import { Send, Clock, ArrowRight } from 'lucide-react';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Button } from '../components/ui/button';

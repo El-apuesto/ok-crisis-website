@@ -122,7 +122,7 @@ export async function fetchComics() {
 
 // Submit opinion
 export async function submitOpinion(submission: { name?: string; email?: string; body: string }) {
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from('submissions')
     .insert([{
       name: submission.name || null,

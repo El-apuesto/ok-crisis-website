@@ -40,22 +40,8 @@ export function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const topStory = articles[0];
-  const otherStories = articles.slice(1);
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    });
-  };
-
-  const getExcerpt = (body: string, maxLength: number = 150) => {
-    const text = body.replace(/\n/g, ' ');
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength).trim() + '...';
-  };
+  // const topStory = articles[0];
+  // const otherStories = articles.slice(1);
 
   return (
     <div className="min-h-screen">
@@ -188,59 +174,6 @@ export function Home() {
     </div>
   );
 }
-
-interface ArticleCardProps {
-  article: Article;
-  index: number;
-  formatDate: (date: string) => string;
-  getExcerpt: (body: string, maxLength?: number) => string;
-}
-
-function ArticleCard({ article, index, formatDate, getExcerpt }: ArticleCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1, rootMargin: '50px' }
-    );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={cardRef}
-      className={`transition-all duration-500 ${
-        isVisible
-          ? 'opacity-100 translate-y-0'
-          : 'opacity-0 translate-y-8'
-      }`}
-      style={{ transitionDelay: `${(index % 6) * 50}ms` }}
-    >
-      <Link
-        to={`/article/${article.id}`}
-        className="group block h-full"
-      >
-        <article className="h-full bg-card/30 border border-border/50 p-6 transition-all duration-300 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 hover:-translate-y-1">
-          {/* Category & Date */}
-          <div className="flex items-center justify-between mb-4">
-            <span className="px-2 py-1 text-[10px] tracking-[0.15em] uppercase border border-accent/30 text-accent">
-              {article.category}
-            </span>
-            <span className="flex items-center gap-1 text-[10px] text-muted-foreground">
-              <Clock className="w-3 h-3" />
-              {formatDate(article.created_at)}
             </span>
           </div>
 
